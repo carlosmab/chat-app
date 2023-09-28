@@ -1,5 +1,5 @@
 from django.contrib.auth import login
-from django.shortcuts import render
+from django.shortcuts import redirect, render
 
 from .forms import SignUpForm
 
@@ -13,7 +13,8 @@ def signup(request):
         if form.is_valid():
             user = form.save()
             login(request, user)
-            return render(request, 'core/frontpage.html')
+            return redirect('frontpage')
     else:
         form = SignUpForm()
     return render(request, 'core/signup.html', {'form': form})
+
